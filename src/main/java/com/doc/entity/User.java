@@ -87,4 +87,5 @@ public class User {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "udt")
     private Date updatedDate;
+
 }

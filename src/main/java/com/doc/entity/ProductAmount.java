@@ -17,6 +17,7 @@ import java.util.Date;
 @NoArgsConstructor
 public class ProductAmount {
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "paid")
@@ -41,4 +42,8 @@ public class ProductAmount {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "udt")
     private Date updatedDate;
+
+
+
 }
+
