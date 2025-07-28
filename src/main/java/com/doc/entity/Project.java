@@ -1,5 +1,6 @@
 package com.doc.entity;
 
+import com.doc.entity.product.Product;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,7 +23,6 @@ public class Project {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "pid")
     @Comment("Primary Key: Unique identifier for the project")
     private Long id;
 
@@ -114,11 +114,6 @@ public class Project {
     @Column(name = "ppc")
     @Comment("Primary Postal Code")
     private String primaryPinCode;
-
-
-
-
-
 
 
 

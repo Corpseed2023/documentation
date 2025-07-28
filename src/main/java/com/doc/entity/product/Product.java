@@ -1,5 +1,7 @@
-package com.doc.entity;
+package com.doc.entity.product;
 
+import com.doc.entity.RequiredDocuments;
+import com.doc.entity.User;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,10 +11,6 @@ import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
-/**
- * Represents a product for which documentation is required.
- * Includes details like required documents, TAT, amount mapping, and metadata.
- */
 @Entity
 @Table(name = "products")
 @Getter
@@ -29,7 +27,6 @@ public class Product {
 
     @Column(length = 1000)
     private String description;
-
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "created_by")
@@ -55,24 +52,23 @@ public class Product {
     @Column(nullable = false)
     private boolean isActive = true;
 
-    /**
-     * Many-to-many relationship to product amounts.
-     * This defines how much is charged per product.
-     */
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "product_amount_map",
             joinColumns = @JoinColumn(name = "product_id"),
             inverseJoinColumns = @JoinColumn(name = "product_amount_id"))
     private List<ProductAmount> productAmounts;
 
-    /**
-     * Document checklist required for this product.
-     */
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "product_required_documents",
             joinColumns = @JoinColumn(name = "product_id"),
             inverseJoinColumns = @JoinColumn(name = "required_document_id"))
     private List<RequiredDocuments> requiredDocuments;
+
+    @ManyToMany(mappedBy = "userProducts", fetch = FetchType.LAZY)
+    private List<User> users;
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<ProductMilestoneMap> milestoneSteps;
 
 
 }

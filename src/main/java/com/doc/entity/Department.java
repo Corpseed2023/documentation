@@ -1,5 +1,6 @@
 package com.doc.entity;
 
+import com.doc.entity.product.DepartmentMilestoneMap;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,9 +9,6 @@ import lombok.Setter;
 import java.util.Date;
 import java.util.List;
 
-/**
- * Represents a department which contains multiple designations.
- */
 @Entity
 @Table(name = "corp_dept")
 @Getter
@@ -20,7 +18,6 @@ public class Department {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private Long id;
 
     @Column(name = "nm", nullable = false, unique = true)
@@ -29,10 +26,16 @@ public class Department {
     @Column(name = "isd", nullable = false)
     private boolean isDeleted = false;
 
+    @OneToMany(mappedBy = "department", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<DepartmentMilestoneMap> milestoneMappings;
+
+    @ManyToMany(mappedBy = "departments", fetch = FetchType.LAZY)
+    private List<User> users;
+
     @OneToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "corp_dept_desg",
-            joinColumns = @JoinColumn(name = "deptid", referencedColumnName = "did"),
+            joinColumns = @JoinColumn(name = "deptid", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "desgid", referencedColumnName = "id")
     )
     private List<Designation> designations;

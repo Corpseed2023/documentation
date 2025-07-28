@@ -19,9 +19,9 @@ import org.hibernate.annotations.Comment;
 @NoArgsConstructor
 public class Company {
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "cid")
     @Comment("Primary key: Company ID")
     private Long id;
 

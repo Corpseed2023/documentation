@@ -1,4 +1,4 @@
-package com.doc.entity;
+package com.doc.entity.product;
 
 import jakarta.persistence.*;
 import lombok.Getter;
