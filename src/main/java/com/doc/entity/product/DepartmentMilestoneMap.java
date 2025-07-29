@@ -34,4 +34,5 @@ public class DepartmentMilestoneMap {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "udt")
     private Date updatedDate;
+
 }
